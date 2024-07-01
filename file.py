@@ -1,7 +1,7 @@
 def work_with_phonebook():
     choice = show_menu()
-    phone_book = read_txt('phonebook.txt')
-    
+    phone_book = read_txt('phone_book.txt')
+
 
     while choice!= 8:
         if choice == 1:
@@ -22,7 +22,7 @@ def work_with_phonebook():
         elif choice == 6:
             user_data = input('Введите новые данные: ')
             add_user(phone_book, user_data)
-            write_txt('phonebook.txt', phone_book)
+            write_txt('phone_book.txt', phone_book)
         elif choice == 7:  
             src_file = input('Введите имя исходного файла: ')
             dst_file = input('Введите имя целевого файла: ')
@@ -32,7 +32,7 @@ def work_with_phonebook():
 
         choice = show_menu()
         if choice == 8:
-            write_txt('phonebook.txt', phone_book)
+            write_txt('phone_book.txt', phone_book)
             break
 
 def show_menu():
@@ -55,11 +55,12 @@ def show_menu():
         except ValueError:
             print('Неверный ввод. Пожалуйста, введите число.')
 
+# отображение справочника
 def read_txt(filename):
     phone_book = []
     with open(filename, 'r', encoding='utf-8') as phb:
         for line in phb:
-            record = dict(zip(['Фамилия', 'Имя', 'Телефон', 'Описание'], line.strip().split(',')))
+            record = dict(zip(['Фамилия', 'Имя', 'Отчество', 'Телефон'], line.strip().split(',')))
             phone_book.append(record)
     return phone_book
 
@@ -71,9 +72,9 @@ def write_txt(filename, phone_book):
 def print_result(phone_book):
     for record in phone_book:
         print(record)
-
+# поиск по фамилии
 def find_by_lastname(phone_book, last_name):
-    result = [record for record in phone_book if record['Фамилия'] == last_name]
+    result = [record for record in phone_book if record['фамилия'] == last_name]
     if result:
         return result
     else:
